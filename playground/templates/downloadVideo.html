@@ -9,20 +9,13 @@
         /* General styles */
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-color: #f0f0f0;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             padding: 0;
-        }
-
-        h1, h2 {
-            color: #ffffff;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
 
         form {
@@ -69,13 +62,10 @@
     </style>
 </head>
 <body>
-    <h1>Successfully download the video.</h1>
-    <h2>Video: {{title}}</h2>
-    Description: {{description}}
-    <form action="/playground/showfinalimage/" method="POST">
-        <label for="text-input">Please enter keywords to get the image:</label>
+    <form action="/playground/displayFinalNumber/" method="POST">
+        <label for="text-input">Enter Youtube Video Url:</label>
         <input type="text" id="text-input" name="text-input">
-        <button type="submit">Submit</button>
+        <button type="submit">Download</button>
     </form>
 </body>
 </html>

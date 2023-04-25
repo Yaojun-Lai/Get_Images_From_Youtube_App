@@ -1,19 +1,24 @@
 import os
 from pytube import YouTube
-def download_youtube_video(url, output_file_name):
-    yt = YouTube(url)
+def download_youtube_video(url, video_output_path = 'videos', video_output_file_name='downloadedVideo'):
+    try:
+      yt = YouTube(url)
 
-    # Get the highest resolution video stream
-    video = yt.streams.get_highest_resolution()
+      # Get the highest resolution video stream
+      video = yt.streams.get_highest_resolution()
 
-    if not os.path.exists('videos'):
-      os.makedirs('videos')
-    # Download the video with a custom file name
+      if not os.path.exists(video_output_path):
+        os.makedirs(video_output_path)
+      
+      video.download(video_output_path, filename=video_output_file_name)
+      # Save the title and description to a file
+      with open(os.path.join(video_output_path,video_output_file_name+'_info.txt'), 'w', encoding='utf-8') as f:
+          f.write('Title: {}\n'.format(yt.title))
+          f.write('Description: {}\n'.format(yt.description))
+      return yt.title, yt.description
+    except Exception as e:
+        print(f"Error: the video is unavaliable")
     
-    video.download('videos', filename=output_file_name)
-# print('Please input the url:')
-# youtube_url = input()
-# # youtube_url="https://www.youtube.com/watch?v=TQ2K1XTCusc"
 
-# # Optionally, provide a save path if you want to save the video to a specific location
-# download_youtube_video(youtube_url, 'test')
+    # audio_stream = yt.streams.filter(only_audio=True).order_by('abr').desc().first()
+    # audio_stream.download(output_path=audio_output_path, filename=audio_output_file_name)

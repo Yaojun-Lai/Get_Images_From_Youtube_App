@@ -8,14 +8,14 @@ from .getImages import get_Images
 def say_hello(request):
     return render(request, 'hello.html', {'name':'Mosh'})
 
-def display_enterNumberHtml(request):
-    return render(request, 'enterNumber.html')
+def display_downloadVideoHtml(request):
+    return render(request, 'downloadVideo.html')
 
 @csrf_exempt
 def display_enterKeywordHtml(request):
     text_value = request.POST.get('text-input')
-    whole_process(text_value)
-    return render(request, 'enterKeyword.html')
+    title, description = whole_process(text_value)
+    return render(request, 'enterKeyword.html', {'title':title, 'description':description})
 
 @csrf_exempt
 def show_final_image(request):
