@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        function validateForm() {
+            var textInput = document.getElementById("text-input").value;
+            var imageInput = document.getElementById("image-input").files.length;
+            
+            if (textInput === "" && imageInput === 0) {
+                alert("Please enter some text or upload an image.");
+                return false;
+            }
+        }
+    </script>
     <style>
         /* General styles */
         body {
@@ -16,7 +27,8 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 0;
+            padding-top: 20px; /* Added padding-top */
+            padding-bottom: 20px; /* Added padding-bottom */
         }
 
         h1, h2 {
@@ -42,7 +54,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 80%;
-            max-width: 900px;
+            max-width: 1000px;
             box-sizing: border-box;
         }
 
@@ -87,10 +99,19 @@
         <p>Description:</p>
         <p>{{description}}</p>
     </div>
-    <form action="/playground/showfinalimage/" method="POST">
-        <label for="text-input">Please enter some keywords or upload a key image to get the image:</label>
+    <form id="myForm" action="/playground/showfinalimage/" method="POST" enctype="multipart/form-data">
+        <b>Please enter some keywords or upload a key image to get matched image:</b>
+        <br>
+        <label for="text-input">Keywords entered:</label>
         <input type="text" id="text-input" name="text-input">
-        <button type="submit">Submit</button>
+        <br>
+        <label for="image-input">Key image uploaded:</label>
+        <input type="file" id="image-input" name="image-input" accept="image/*">
+        <br>
+        <br>
+        <label for="text-input2">Number of images matched:</label>
+        <input type="text" id="text-input2" name="text-input2"  required>
+        <button type="submit" onclick="return validateForm();">Match</button>
     </form>
 </body>
 </html>

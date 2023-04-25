@@ -4,10 +4,19 @@ import os
 from PIL import Image
 import torch
 
-def get_Images(keywordpargraph):
+def get_Images(k, keywordpargraph=None, keyimage=None):
+    key_image_vector = None
+    print('Starting building models')
     text_model = SentenceTransformer('clip-ViT-B-32-multilingual-v1')
     image_model = SentenceTransformer('clip-ViT-B-32')
-
+    print('Building models finished')
+    if keyimage:
+        print(keyimage)
+        keyImage_RGB_array = []
+        keyImage_RGB_array.append(Image.open(keyimage).convert('RGB'))
+        print('Starting encoding keyimage')
+        key_image_vector = image_model.encode(keyImage_RGB_array)
+        print('Encoding keyimage finished')
     def load_images_from_directory(directory):
         image_tensors = []
 
@@ -114,8 +123,12 @@ def get_Images(keywordpargraph):
         print(imageNames)
 
         return final_sims, imageNames
-    
-    return find_k_most_matched_indexes(4, keyword=keywordpargraph)
+    if keywordpargraph and keyimage:
+        return find_k_most_matched_indexes(k, keyword=keywordpargraph, key_image_vector=key_image_vector)
+    elif keywordpargraph:
+        return find_k_most_matched_indexes(k, keyword=keywordpargraph)
+    else:
+        return find_k_most_matched_indexes(k, key_image_vector=key_image_vector)
     # # max_sim_index = find_keyword_index(keywordpargraph)
     # max_sim_index = k_most_matched_index[0][1]
     # str_max_sim_index = str(max_sim_index + 1).zfill(4)

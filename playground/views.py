@@ -19,8 +19,10 @@ def display_enterKeywordHtml(request):
 
 @csrf_exempt
 def show_final_image(request):
-    text_value = request.POST.get('text-input')
-    final_sims, imageNames = get_Images(text_value)
+    keywords = request.POST.get('text-input')
+    k = int(request.POST.get('text-input2'))
+    image_file = request.FILES.get('image-input')
+    final_sims, imageNames = get_Images(k, keywords, image_file)
     image_data = zip(final_sims, imageNames)
     return render(request, 'displayImage.html', {'image_data': image_data})
     # return render(request, 'displayFinalNumber.html')
