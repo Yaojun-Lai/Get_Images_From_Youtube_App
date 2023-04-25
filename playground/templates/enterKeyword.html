@@ -25,13 +25,24 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
         }
 
+        .description-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
         form {
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             width: 80%;
-            max-width: 500px;
+            max-width: 900px;
             box-sizing: border-box;
         }
 
@@ -70,10 +81,14 @@
 </head>
 <body>
     <h1>Successfully download the video.</h1>
-    <h2>Video: {{title}}</h2>
-    Description: {{description}}
+    
+        <h2>Video: {{title}}</h2>
+    <div class="description-container">
+        <p>Description:</p>
+        <p>{{description}}</p>
+    </div>
     <form action="/playground/showfinalimage/" method="POST">
-        <label for="text-input">Please enter keywords to get the image:</label>
+        <label for="text-input">Please enter some keywords or upload a key image to get the image:</label>
         <input type="text" id="text-input" name="text-input">
         <button type="submit">Submit</button>
     </form>

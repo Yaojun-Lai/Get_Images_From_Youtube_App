@@ -1,1 +1,12 @@
-<h1>2</h1>
+<!-- templates/image.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<body>
+  <img src="{% static 'images/Screen5.png' %}"  alt="Girl in a jacket" width="500" height="600">
+  {% for number in [4, 5, 6] %}
+  <img src="image_object.image.url" alt= "{{number}}",width="500" height="600">
+    {% endfor %}
+
+</body>
+</html>

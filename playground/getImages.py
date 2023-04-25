@@ -23,11 +23,11 @@ def get_Images(keywordpargraph):
                 image_tensors.append(image)
 
         return image_tensors
-
+    print('Start encoding image tensors')
     image_directory = 'images'
     image_tensors = load_images_from_directory(image_directory)
     image_vectors = image_model.encode(image_tensors)
-
+    print('Encoding image tensors finished')
     # def find_keyword_index(keyword=None, key_image_vector=None):
     #     if keyword is None and key_image_vector is None:
     #         raise ValueError("At least one of 'keyword' or 'key_image_vector' must be provided.")
@@ -60,12 +60,14 @@ def get_Images(keywordpargraph):
     #         image_sims.append([sim_avg, i])
 
     #     return max_sim_index[1]
-    def find_k_most_matched_indexes(k, output_path='result',source_path ='images',keyword=None, key_image_vector=None):
+    def find_k_most_matched_indexes(k, output_path='images',source_path ='images',keyword=None, key_image_vector=None):
         if keyword is None and key_image_vector is None:
             raise ValueError("At least one of 'keyword' or 'key_image_vector' must be provided.")
 
         if keyword is not None:
+            print('Starting encoding keywords')
             text_vec = text_model.encode([keyword])
+            print('Encoding keywords finished')
 
         image_sims = []
         max_sim_index = [float('-inf'), 0]
@@ -92,25 +94,34 @@ def get_Images(keywordpargraph):
             image_sims.append([sim_avg, i])
         image_sims.sort(reverse=True)
         k_most_matched_indexes = image_sims[:k]
+        count = 1
+        final_sims = []
+        imageNames = []
         for sim, index in k_most_matched_indexes:
-            if not os.path.exists(output_path):
-                os.makedirs(output_path)
+            if not os.path.exists('static/images'):
+                os.makedirs('static/images')
             
             str_max_sim_index = str(index).zfill(4)
             image_path = source_path +  '/' + str_max_sim_index +'.png'
             img = Image.open(image_path)
-            img.save(output_path + '/' + str_max_sim_index + '.png')
+            newImageName = os.path.join(output_path, str(count).zfill(4) + '.png')
+            imageNames.append(newImageName)
+            img.save(os.path.join('static', newImageName))
             img.close()
+            count += 1
+            final_sims.append(sim)
+        print(imageNames)
 
-        return k_most_matched_indexes
+        return final_sims, imageNames
+    
+    return find_k_most_matched_indexes(4, keyword=keywordpargraph)
+    # # max_sim_index = find_keyword_index(keywordpargraph)
+    # max_sim_index = k_most_matched_index[0][1]
+    # str_max_sim_index = str(max_sim_index + 1).zfill(4)
+    # image_path = 'images/' + str_max_sim_index +'.png'
+    # img = Image.open(image_path)
+    # if not os.path.exists("result"):
+    #   os.makedirs("result")
+    # img.save('result/finalImage.png')
+    # img.close()
 
-    k_most_matched_index = find_k_most_matched_indexes(4, keyword=keywordpargraph)
-    # max_sim_index = find_keyword_index(keywordpargraph)
-    max_sim_index = k_most_matched_index[0]
-    str_max_sim_index = str(max_sim_index + 1).zfill(4)
-    image_path = 'images/' + str_max_sim_index +'.png'
-    img = Image.open(image_path)
-    if not os.path.exists("result"):
-      os.makedirs("result")
-    img.save('result/finalImage.png')
-    img.close()

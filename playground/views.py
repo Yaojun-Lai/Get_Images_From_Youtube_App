@@ -6,7 +6,7 @@ from .wholeProcess import whole_process
 from .getImages import get_Images
 # Create your views here.
 def say_hello(request):
-    return render(request, 'hello.html', {'name':'Mosh'})
+    return render(request, 'displayFinalNumber.html')
 
 def display_downloadVideoHtml(request):
     return render(request, 'downloadVideo.html')
@@ -20,6 +20,6 @@ def display_enterKeywordHtml(request):
 @csrf_exempt
 def show_final_image(request):
     text_value = request.POST.get('text-input')
-    get_Images(text_value)
-    return render(request, 'displayImage.html')
+    final_sims, imageNames = get_Images(text_value)
+    return render(request, 'displayImage.html', {'final_sims': final_sims, 'imageNames': imageNames})
     # return render(request, 'displayFinalNumber.html')
