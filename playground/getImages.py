@@ -109,7 +109,8 @@ def get_Images(keywordpargraph):
             img.save(os.path.join('static', newImageName))
             img.close()
             count += 1
-            final_sims.append(sim)
+            final_sims.append(sim.item())
+        print(final_sims)
         print(imageNames)
 
         return final_sims, imageNames

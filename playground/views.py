@@ -21,5 +21,6 @@ def display_enterKeywordHtml(request):
 def show_final_image(request):
     text_value = request.POST.get('text-input')
     final_sims, imageNames = get_Images(text_value)
-    return render(request, 'displayImage.html', {'final_sims': final_sims, 'imageNames': imageNames})
+    image_data = zip(final_sims, imageNames)
+    return render(request, 'displayImage.html', {'image_data': image_data})
     # return render(request, 'displayFinalNumber.html')

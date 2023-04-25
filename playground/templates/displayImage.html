@@ -1,12 +1,48 @@
-<!-- templates/image.html -->
 {% load static %}
 <!DOCTYPE html>
 <html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      /* background-color: #f0f0f0; */
+    }
+    
+    .image-container {
+      box-sizing: border-box;
+      padding: 20px;
+      margin: 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    p {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: #333;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
 <body>
-  <!-- <img src="{% static 'images/Screen5.png' %}"  alt="Girl in a jacket" width="500" height="600"> -->
-  {% for imageName in imageNames %}
-  <img src="{% static ''|add:imageName %}"  alt="Image {{ forloop.counter }}" width="500" height="600">
-    {% endfor %}
+
+{% for number, imageName in image_data %}
+  <div class="image-container">
+    <p>Predicted Accuracy: {{ number }}</p>
+    <img src="{% static ''|add:imageName %}"  alt="Image {{ forloop.counter }}" width="500" height="600">
+  </div>
+{% endfor %}
 
 </body>
 </html>
