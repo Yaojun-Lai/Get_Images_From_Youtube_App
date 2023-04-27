@@ -5,6 +5,7 @@ The Get Images From YouTube App is a web application built using Django that ena
 ## Model
 
 The app uses the OpenAI CLIP model to extract images and the OpenAI Whisper model to transcribe the audio of the video.
+The Python model available at https://colab.research.google.com/drive/1E3Q5FQGVizitBojWL2sY9syR55yqMwhY?usp=sharing, which has been evaluated to perform best when taking both keywords and key images as parameters.
 
 
 ## Note
