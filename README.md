@@ -12,6 +12,12 @@ The Python model available at https://colab.research.google.com/drive/1E3Q5FQGVi
 
 Please note that the app may not work due to inconsistencies with the Pytube library. There have been recent bugs reported with this library that may affect the app's functionality.
 
+
+## Acknowledgments
+
+We would like to thank Shuxin Li, Katherin Liu, Rebecca Ji, and Qianyi Zhang for providing training data and testing data to evaluate the model.
+
+
 ## Installation
 
 To run the app locally, follow these steps:
