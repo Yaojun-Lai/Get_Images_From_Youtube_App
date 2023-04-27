@@ -15,7 +15,7 @@ Please note that the app may not work due to inconsistencies with the Pytube lib
 
 ## Acknowledgments
 
-I would like to thank Shuxin Li, Katherine Liu, Rebecca Ji, and Qianyi Zhang for providing training data and testing data to evaluate the model, while Yuan Yuan provided insights and suggestions on evaluating the model.
+I would like to thank Professor. Roman for generously sharing his time, expertise, and providing valuable feedback throughout the course of this project. I would also like to thank Shuxin Li, Katherine Liu, Rebecca Ji, and Qianyi Zhang for providing training data and testing data to evaluate the model, while Yuan Yuan provided insights and suggestions on evaluating the model.
 
 
 ## Installation
